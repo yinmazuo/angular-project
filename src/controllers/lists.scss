@@ -1,0 +1,56 @@
+
+.unpublished {color: #0000ff}
+.published {color: #00ff00}
+.ended {color: #ff0000}
+
+.add-button-large {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -72px;
+  margin-top: -40px;
+}
+
+.lists {
+  width: 100%;
+  height: 100%;
+  .lists-header {
+    overflow: hidden;
+    width: 100%;
+    margin: 20px 0;
+    h2 {
+      float: left;
+      margin: 0;
+      width: 60%;
+    }
+    button {
+      float: right;
+    }
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    thead {
+      background-color: #000;
+      color: #fff;
+    }
+    tr {
+      height: 32px;
+    }
+    tbody tr {
+      cursor: pointer;
+      &:hover {
+        background-color: #666;
+        color: #fff;
+      }
+    }
+    td, th {
+      text-align: center;
+      border-bottom: 1px solid #666;
+      padding: 10px 0;
+    }
+
+  }
+}

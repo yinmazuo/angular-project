@@ -1,0 +1,33 @@
+button.btn {
+  background-color: #FFF;
+  color: #000;
+  border-radius: 3px;
+  border: 1px solid $active-color;
+  text-align: center;
+  cursor: pointer;
+  &:hover {
+    background-color: $active-color;
+    color: #fff;
+  }
+  
+  &.large {
+    font-size: 36px;
+    padding: 5px 36px;
+    line-height: 68px;
+  }
+  &.medium {
+    font-size: 24px;
+    padding: 3px 24px;
+    line-height: 40px;
+  }
+  &.small {
+    font-size: 18px;
+    padding: 3px 18px;
+    line-height: 24px;
+  }
+  &.xsmall {
+    font-size: 14px;
+    padding: 2px 14px;
+    line-height: 14px;
+  }
+}

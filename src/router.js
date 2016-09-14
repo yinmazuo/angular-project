@@ -5,22 +5,39 @@ module.exports = function(app, utils) {
   app.config(function($urlRouterProvider, $stateProvider) {
     
     $urlRouterProvider
-      .when('', '/')
+      .when('', '/home')
       .otherwise('');
 
     $stateProvider
       .state({
         name: 'mars',
-        url: '/',
+        url: '',
         controller: 'RootCtrl',
         template: tpl('root'),
       })
       .state({
         name: 'mars.lists',
-        url: '/lists',
+        url: '/home',
         controller: 'ListsCtrl', 
         template: tpl('lists'),
       })
-
+      .state({
+        name: 'mars.edit',
+        url: '/edit',
+        controller: 'EditCtrl', 
+        template: tpl('edit'),
+      })
+      .state({
+        name: 'mars.preview',
+        url: '/preview',
+        controller: 'PreviewCtrl', 
+        template: tpl('preview'),
+      })
+      .state({
+        name: 'mars.results',
+        url: '/results',
+        controller: 'ResultsCtrl', 
+        template: tpl('results'),
+      })
   });
 };

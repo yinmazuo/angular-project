@@ -1,0 +1,53 @@
+
+<button type="button" 
+        class="btn large add-button-large" 
+        ng-show="lists.length === 0"
+        ng-click="addList()">
+  <i class="icon-plus"></i>
+</button>
+
+<div class="lists" ng-show="lists.length > 0">
+  <div class="lists-header">
+    <h2>问卷列表</h2>
+    <button type="button" class="btn small" ng-click="addList()">Add list</button>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th><input type="checkbox" name="lists" ng-model="allSelected"></th>
+        <th>title</th>
+        <th>start time</th>
+        <th>end time</th>
+        <th>status</th>
+        <th>operating</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="list in lists track by $index">
+        <td><input type="checkbox" name="lists" ng-model="list.selected"></td>
+        <td>{{list.title}}</td>
+        <td>{{list.startTime}}</td>
+        <td>{{list.endTime}}</td>
+        <td ng-if="list.status === 0" class="unpublished">unpublished</td>
+        <td ng-if="list.status === 1" class="published">published</td>
+        <td ng-if="list.status === 2" class="ended">ended</td>
+        <td>
+          <button type="button" 
+                  class="btn xsmall" 
+                  ui-sref="mars.edit"
+                  ng-disabled="list.status !== 0">edit</button>
+          <button type="button" 
+                  class="btn xsmall" 
+                  ui-sref="mars.preview"
+                  ng-if="list.status !== 2">preview</button>
+          <button type="button" 
+                  class="btn xsmall" 
+                  ui-sref="mars.results"
+                  ng-if="list.status === 2">results</button>
+          <button type="button" class="btn xsmall" ng-click="del(list.id)">delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button type="button" class="btn small" ng-click="multiDel()">Delete</button>
+</div>
