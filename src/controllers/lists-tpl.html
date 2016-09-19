@@ -1,15 +1,17 @@
 
-<button type="button" 
-        class="btn large add-button-large" 
-        ng-show="lists.length === 0"
+<div class="add-button-wrapper" ng-show="lists.length === 0">
+  <button type="button"
+        class="mars-btn large add-button-large"
         ng-click="addList()">
-  <i class="icon-plus"></i>
-</button>
+    <i class="icon-plus"></i>
+  </button>
+</div>
+
 
 <div class="lists" ng-show="lists.length > 0">
   <div class="lists-header">
     <h2>问卷列表</h2>
-    <button type="button" class="btn small" ng-click="addList()">Add list</button>
+    <button type="button" class="mars-btn small" ng-click="addList()">Add list</button>
   </div>
   <table>
     <thead>
@@ -32,22 +34,22 @@
         <td ng-if="list.status === 1" class="published">published</td>
         <td ng-if="list.status === 2" class="ended">ended</td>
         <td>
-          <button type="button" 
-                  class="btn xsmall" 
+          <button type="button"
+                  class="mars-btn xsmall"
                   ui-sref="mars.edit"
                   ng-disabled="list.status !== 0">edit</button>
-          <button type="button" 
-                  class="btn xsmall" 
+          <!-- <button type="button"
+                  class="mars-btn xsmall"
                   ui-sref="mars.preview"
-                  ng-if="list.status !== 2">preview</button>
-          <button type="button" 
-                  class="btn xsmall" 
+                  ng-if="list.status !== 2">preview</button> -->
+          <button type="button"
+                  class="mars-btn xsmall"
                   ui-sref="mars.results"
-                  ng-if="list.status === 2">results</button>
-          <button type="button" class="btn xsmall" ng-click="del(list.id)">delete</button>
+                  ng-disabled="list.status === 2">results</button>
+          <button type="button" class="mars-btn xsmall" ng-click="del(list.id)">delete</button>
         </td>
       </tr>
     </tbody>
   </table>
-  <button type="button" class="btn small" ng-click="multiDel()">Delete</button>
+  <button type="button" class="mars-btn small" ng-click="multiDel()">Delete</button>
 </div>

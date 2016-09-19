@@ -1,6 +1,5 @@
 .edit {
   width: 100%;
-  height: 40px;
   .edit-title {
     overflow: hidden;
     width: 100%;
@@ -9,10 +8,11 @@
     background-color: #999;
     h2 {
       float: left;
-      width: 80%;
+      width: 70%;
       height: 100%;
       margin: 0;
       color: #fff;
+      padding-left: 20px;
     }
   }
   .edit-btn-group {
@@ -24,5 +24,44 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+
+  .edit-question-lists {
+    .question {
+      position: relative;
+      .edit-question-btn-group {
+        position: absolute;
+        top: 0;
+        right: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .question-title {
+        padding-left: 20px;
+      }
+      .question-title,
+      .question-item,
+      .question-textarea {
+        margin: 10px 0;
+      }
+
+      input[type="text"] {
+        width: 400px;
+      }
+    }
+    ul {
+      list-style: none;
+    }
+  }
+
+  .edit-datepicker {
+    overflow: hidden;
+    padding: 20px 20px;
+    p {
+      width: 50%;
+      float: left;
+    }
   }
 }

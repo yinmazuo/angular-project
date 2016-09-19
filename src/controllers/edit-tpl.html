@@ -1,32 +1,63 @@
 <div class="edit">
   <div class="edit-title">
-    <h2>{{list.title}}</h2>
+    <h2 ng-if="!titleEditable" ng-click="titleEdit()">{{list.title}}</h2>
+    <h2 ng-if="titleEditable">
+      <input type="text" ng-model="list.title" style="color: #000;" ng-blur="titleSave()">
+    </h2>
     <div class="edit-btn-group">
-      <button class="btn small" ng-click="save()">Save</button>
-      <button class="btn small back" ui-sref="mars.lists">Back</button>
-    </div>
-  </div>  
-  <div class="edit-question-lists">
-    <div class="question">
-      <span class="question-seq">{{question.seq}}</span>
-      <h3 class="question-title">{{question.title}}</h2>
-      <div class="question-items" ng-if="question.type !== 'textarea'">
-        <span class="question-item" ng-repeat="item in question.items track by $index">
-          <input ng-if="question.type === 'ratio'" type="ratio" name="">
-          <input ng-if="question.type === 'checkbox'" type="checkbox" name="">
-          <span>{{String.fromCharCode(65 + $index)}}</span>
-          <input type="text" ng-model="item">         
-        </span>
-      </div>
-      <div class="question-textarea" ng-if="question.type === 'textarea'">
-        <textarea ng-model="textarea"></textarea>
-      </div>
+      <button class="mars-btn small" ng-click="save()">Save</button>
+      <button class="mars-btn small back" ui-sref="mars.lists">Back</button>
     </div>
   </div>
-  <div class="edit-add-question">
-    
-  </div> 
   <div class="edit-datepicker">
-    
+    <p class="edit-startTime">
+      <label for="startTime">Start time:</label>
+      <input type="text" uib-datepicker-popup='yyyy/MM/dd'
+        ng-model="list.startTime"
+        is-open="startTime.opened"
+        datepicker-options="dateOptions"
+        ng-focus="startTime.opened = true"
+        ng-blur="startTime.opend = false"
+        ng-required="true" close-text="Close" />
+    </p>
+    <p class="edit-endTime">
+      <label for="endTime">End time:</label>
+      <input type="text"
+        uib-datepicker-popup='yyyy/MM/dd'
+        ng-model="list.endTime"
+        is-open="endTime.opened"
+        datepicker-options="dateOptions"
+        ng-focus="endTime.opened = true"
+        ng-blur="endTime.opend = false"
+        ng-required="true" close-text="Close" />
+    </p>
+  </div>
+  <ol class="edit-question-lists">
+    <li class="question" ng-repeat="question in list.questions track by $index">
+      <div class="edit-question-btn-group">
+        <button class="mars-btn xsmall" ng-click="up()">up</button>
+        <button class="mars-btn xsmall" ng-click="down()">down</button>
+        <button class="mars-btn xsmall" ng-click="clone(question)">clone</button>
+        <button class="mars-btn xsmall" ng-if="question.editable" ng-click="questionSave(question)">save</button>
+        <button class="mars-btn xsmall" ng-if="!question.editable" ng-click="edit(question)">edit</button>
+      </div>
+      <h3 class="question-title" ng-if="!question.editable">{{question.title}}</h3>
+      <h3 class="question-title" ng-if="question.editable"><input type="text" ng-model="question.title"></h3>
+      <ul class="question-items" ng-if="question.type !== 'textarea'">
+        <li class="question-item" ng-repeat="item in question.items track by $index">
+          <input ng-if="question.type === 'radio'" type="radio" disabled>
+          <input ng-if="question.type === 'checkbox'" type="checkbox" disabled>
+          <span>{{$index | toLetter}}.</span>
+          <span ng-if="!question.editable">{{item}}</span>
+          <input ng-if="question.editable" type="text" ng-model="item">
+        </li>
+      </ul>
+      <div class="question-textarea" ng-if="question.type === 'textarea'">
+        <textarea ng-model="textarea" rows="10" cols="50"></textarea>
+      </div>
+    </li>
+  </ol>
+  <div class="edit-add-question">
+
   </div>
 </div>
