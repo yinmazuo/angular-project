@@ -1,5 +1,6 @@
 .edit {
   width: 100%;
+  hr {border-top: 1px solid #666;}
   .edit-title {
     overflow: hidden;
     width: 100%;
@@ -56,12 +57,13 @@
     }
   }
 
-  .edit-datepicker {
-    overflow: hidden;
-    padding: 20px 20px;
-    p {
-      width: 50%;
-      float: left;
+  .edit-form-group {
+    form {
+      padding-left: 20px;
+      margin: 20px 0;
+      label {
+        width: 10%;
+      }
     }
   }
 }

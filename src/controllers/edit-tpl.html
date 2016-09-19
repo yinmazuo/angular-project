@@ -9,8 +9,8 @@
       <button class="mars-btn small back" ui-sref="mars.lists">Back</button>
     </div>
   </div>
-  <div class="edit-datepicker">
-    <p class="edit-startTime">
+  <div class="edit-form-group">
+    <form class="edit-startTime">
       <label for="startTime">Start time:</label>
       <input type="text" uib-datepicker-popup='yyyy/MM/dd'
         ng-model="list.startTime"
@@ -19,8 +19,8 @@
         ng-focus="startTime.opened = true"
         ng-blur="startTime.opend = false"
         ng-required="true" close-text="Close" />
-    </p>
-    <p class="edit-endTime">
+    </form>
+    <form class="edit-endTime">
       <label for="endTime">End time:</label>
       <input type="text"
         uib-datepicker-popup='yyyy/MM/dd'
@@ -30,16 +30,25 @@
         ng-focus="endTime.opened = true"
         ng-blur="endTime.opend = false"
         ng-required="true" close-text="Close" />
-    </p>
+    </form>
+    <form class="edit-add-question">
+      <label for="addQuestion">Add question:</label>
+      <select name="addQuestion" ng-model="addQuestionType" ng-change="isEmpty()">
+        <option ng-repeat="option in ['radio', 'checkbox', 'textarea']">{{option}}</option>
+      </select>
+      <button class="mars-btn xsmall add-question" ng-click="addQuestion()" ng-if="isNotEmpty">add question</button>
+    </form>
   </div>
+  <hr/>
   <ol class="edit-question-lists">
     <li class="question" ng-repeat="question in list.questions track by $index">
       <div class="edit-question-btn-group">
-        <button class="mars-btn xsmall" ng-click="up()">up</button>
-        <button class="mars-btn xsmall" ng-click="down()">down</button>
+        <button class="mars-btn xsmall" ng-click="up($index, question)">up</button>
+        <button class="mars-btn xsmall" ng-click="down($index, question)">down</button>
         <button class="mars-btn xsmall" ng-click="clone(question)">clone</button>
         <button class="mars-btn xsmall" ng-if="question.editable" ng-click="questionSave(question)">save</button>
         <button class="mars-btn xsmall" ng-if="!question.editable" ng-click="edit(question)">edit</button>
+        <button class="mars-btn xsmall" ng-click="del($index)">delete</button>
       </div>
       <h3 class="question-title" ng-if="!question.editable">{{question.title}}</h3>
       <h3 class="question-title" ng-if="question.editable"><input type="text" ng-model="question.title"></h3>
@@ -49,15 +58,12 @@
           <input ng-if="question.type === 'checkbox'" type="checkbox" disabled>
           <span>{{$index | toLetter}}.</span>
           <span ng-if="!question.editable">{{item}}</span>
-          <input ng-if="question.editable" type="text" ng-model="item">
+          <input ng-if="question.editable" type="text" ng-model="question.items[$index]">
         </li>
       </ul>
       <div class="question-textarea" ng-if="question.type === 'textarea'">
-        <textarea ng-model="textarea" rows="10" cols="50"></textarea>
+        <textarea ng-model="question.textarea" rows="10" cols="80"></textarea>
       </div>
     </li>
   </ol>
-  <div class="edit-add-question">
-
-  </div>
 </div>
