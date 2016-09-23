@@ -1,7 +1,7 @@
 {
   "name": "app5",
   "version": "1.0.0",
-  "description": "",
+  "description": "Angular exercise",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --hot --progress --colors",
