@@ -15,16 +15,16 @@
 ###页面截图
 * home
 
-  ![home](./screenshot/1.png)
+  ![home](./screenshot/1.PNG)
 
 * edit
 
-  ![edit](./screenshot/2.png)
+  ![edit](./screenshot/2.PNG)
 
 * result
 
-  ![result](./screenshot/3.png)
+  ![result](./screenshot/3.PNG)
 
 * preview
 
-  ![preview](./screenshot/4.png)
+  ![preview](./screenshot/4.PNG)
