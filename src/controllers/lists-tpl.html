@@ -36,15 +36,15 @@
         <td>
           <button type="button"
                   class="mars-btn xsmall"
-                  ui-sref="mars.edit"
-                  ng-disabled="list.status !== 0">edit</button>
-          <!-- <button type="button"
-                  class="mars-btn xsmall"
-                  ui-sref="mars.preview"
-                  ng-if="list.status !== 2">preview</button> -->
+                  ui-sref="mars.edit({listId:$index})"
+                  ng-if="list.status === 0">edit</button>
           <button type="button"
                   class="mars-btn xsmall"
-                  ui-sref="mars.results"
+                  ui-sref="mars.preview({listId:$index})"
+                  ng-if="list.status !== 0">preview</button>
+          <button type="button"
+                  class="mars-btn xsmall"
+                  ui-sref="mars.results({listId:$index})"
                   ng-disabled="list.status === 2">results</button>
           <button type="button" class="mars-btn xsmall" ng-click="del(list.id)">delete</button>
         </td>

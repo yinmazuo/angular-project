@@ -1,39 +1,10 @@
 module.exports = function(app, utils) {
-  app.controller('EditCtrl', function($scope, $state) {
-    $scope.list = {
-      id: 0,
-      title: "one",
-      startTime:  new Date("2016/09/09"),
-      endTime:  new Date("2016/09/10"),
-      status: 0,
-      questions: [
-        {
-          type: "radio",
-          title: "question title",
-          items: [
-            "item 1",
-            "item 2",
-            "item 3",
-            "item 4"
-          ]
-        },
-        {
-          type: "checkbox",
-          title: "question title",
-          items: [
-            "item 1",
-            "item 2",
-            "item 3",
-            "item 4"
-          ]
-        },
-        {
-          type: "textarea",
-          title: "question title",
-          textarea: "textarea"
-        },
-      ]
-    }
+  app.controller('EditCtrl', function($scope, $state, $stateParams, $filter) {
+    let index = $stateParams.listId;
+    let lists = JSON.parse(localStorage.getItem("lists"));
+    $scope.list = lists[index];
+    $scope.list.startTime = new Date($scope.list.startTime);
+    $scope.list.endTime = new Date($scope.list.endTime);
 
     $scope.dateOptions = {
       maxDate: new Date(2020, 1, 1),
@@ -93,8 +64,17 @@ module.exports = function(app, utils) {
     };
 
     $scope.save = () => {
-      $state.go("mars.lists")
+      $scope.list.startTime = $filter("date")($scope.list.startTime, "yyyy/MM/dd");
+      $scope.list.endTime = $filter("date")($scope.list.endTime, "yyyy/MM/dd");
+
+      lists[index] = $scope.list;
+      localStorage.setItem("lists", JSON.stringify(lists));
+      $state.go("mars.lists");
     };
 
+    $scope.publish = () => {
+      $scope.list.status = 1;
+      $scope.save();
+    };
   });
 }

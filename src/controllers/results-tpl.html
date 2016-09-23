@@ -1,0 +1,36 @@
+<div class="results preview edit">
+  <div class="preview-title">
+    <h2>{{result.title}}</h2>
+    <button class="mars-btn small" ui-sref="mars.lists">back</button>
+  </div>
+  <div class="preview-form-group">
+    <form>
+      <label for="startTime">Start time:</label>
+      <span>{{result.startTime}}</span>
+    </form>
+    <form>
+      <label for="endTime">End time:</label>
+      <span>{{result.endTime}}</span>
+    </form>
+  </div>
+  <hr/>
+  <ol class="edit-question-lists">
+    <li class="question" ng-repeat="question in result.questions track by $index">
+      <h3 class="question-title">{{question.title}}</h3>
+      <ul class="question-items" ng-if="question.type === 'checkbox'">
+        <li class="question-item" ng-repeat="item in question.items track by $index">
+          <input ng-if="question.type === 'checkbox'" type="checkbox" name="question">
+          <span>{{$index | toLetter}}.</span>
+          <span>{{item.content}}</span>
+          <progress-bar percentage="item.percentage"></progress-bar>
+        </li>
+      </ul>
+      <div ng-if="question.type === 'radio'">
+        <pie-chart data="question.items" style="width: 400px; height: 200px;"></pie-chart>
+      </div>
+      <div class="question-textarea" ng-if="question.type === 'textarea'">
+        <progress-bar percentage="question.validResponsePercentage"></progress-bar>
+      </div>
+    </li>
+  </ol>
+</div>

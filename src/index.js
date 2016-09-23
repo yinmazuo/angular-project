@@ -5,8 +5,10 @@ require('whatwg-fetch');
 
 //加载libs中的通用样式
 require('./libs/common.scss');
+
 require('angular-ui-bootstrap/src/datepickerPopup');
 require('bootstrap/dist/css/bootstrap.min.css');
+
 require('angular-ui-router');
 require('angular-ui-router.statehelper');
 let questionApp = angular.module('questionApp', [

@@ -1,0 +1,33 @@
+<div class="preview edit">
+  <div class="preview-title">
+    <h2>{{list.title}}</h2>
+    <button class="mars-btn small" ui-sref="mars.lists">back</button>
+  </div>
+  <div class="preview-form-group">
+    <form>
+      <label for="startTime">Start time:</label>
+      <span>{{list.startTime}}</span>
+    </form>
+    <form>
+      <label for="endTime">End time:</label>
+      <span>{{list.endTime}}</span>
+    </form>
+  </div>
+  <hr/>
+  <ol class="edit-question-lists">
+    <li class="question" ng-repeat="question in list.questions track by $index">
+      <h3 class="question-title">{{question.title}}</h3>
+      <ul class="question-items" ng-if="question.type !== 'textarea'">
+        <li class="question-item" ng-repeat="item in question.items track by $index">
+          <input ng-if="question.type === 'radio'" type="radio" name="question">
+          <input ng-if="question.type === 'checkbox'" type="checkbox" name="question">
+          <span>{{$index | toLetter}}.</span>
+          <span>{{item}}</span>
+        </li>
+      </ul>
+      <div class="question-textarea" ng-if="question.type === 'textarea'">
+        <textarea rows="10" cols="80"></textarea>
+      </div>
+    </li>
+  </ol>
+</div>

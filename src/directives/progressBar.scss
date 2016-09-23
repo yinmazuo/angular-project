@@ -1,0 +1,25 @@
+.progressBarWarpper {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 18px;
+  border-radius: 5px;
+  border: 1px solid #000;
+  span {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 18px;
+    text-align: center;
+    line-height: 18px;
+    font-size: 14px;
+    color: #000;
+  }
+  .progressBarInner {
+    height: 18px;
+    border-radius: 5px;
+    background-color: #00ff00;
+  }
+}

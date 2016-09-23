@@ -5,6 +5,7 @@
       <input type="text" ng-model="list.title" style="color: #000;" ng-blur="titleSave()">
     </h2>
     <div class="edit-btn-group">
+      <button class="mars-btn small" ng-click="publish()" ng-if="list.status === 0">Publish</button>
       <button class="mars-btn small" ng-click="save()">Save</button>
       <button class="mars-btn small back" ui-sref="mars.lists">Back</button>
     </div>

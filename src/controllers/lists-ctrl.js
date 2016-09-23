@@ -1,32 +1,31 @@
 module.exports = function(app, utils) {
-  app.controller('ListsCtrl', function($scope, $filter) {
-    let listCounter = 3;
+  app.controller('ListsCtrl', function($scope, $filter, $interval, $location) {
+    if (localStorage.getItem("lists") === null) {
+      $scope.lists = require('../data.json');
+    } else {
+      $scope.lists = JSON.parse(localStorage.getItem("lists"));
+    }
+
+    let timeout = () => {
+      $scope.lists.forEach((item, index, array) => {
+        if (item.status === 1) {
+          new Date(item.endTime) < new Date()
+          ? item.status = 2
+          : void 0;
+        }
+      });
+    };
+
+    let interval = $interval(timeout, 1000);
+
+    $scope.$on('$stateChangeStart', (event, toState) => {
+      $interval.cancel(interval);
+    });
+
+    let updateStorage = () => localStorage.setItem("lists", JSON.stringify($scope.lists));
+    updateStorage();
 
     $scope.allSelected = false;
-
-    $scope.lists = [
-      {
-        id: 0,
-        title: "one",
-        startTime: "2016/09/09",
-        endTime: "2016/09/10",
-        status: 0
-      },
-      {
-        id: 1,
-        title: "two",
-        startTime: "2016/09/09",
-        endTime: "2016/09/10",
-        status: 1
-      },
-      {
-        id: 2,
-        title: "three",
-        startTime: "2016/09/09",
-        endTime: "2016/09/10",
-        status: 2
-      }
-    ];
 
     $scope.$watch('allSelected', (newValue, oldValue) => {
       $scope.lists.forEach((item) => {
@@ -41,6 +40,7 @@ module.exports = function(app, utils) {
 
     $scope.multiDel = () => {
       $scope.lists = $scope.lists.filter((item) => !item.selected );
+      updateStorage();
     };
 
     $scope.del = (id) => {
@@ -49,19 +49,22 @@ module.exports = function(app, utils) {
         item.id === id ? i = index : void 0;
       });
       i > -1 ? $scope.lists.splice(i, 1) : void 0;
+      updateStorage();
     };
 
     $scope.addList = () => {
       let nowDate = new Date();
       let newList = {
-        id: ++listCounter,
+        id: $scope.lists.length,
         title: "New list",
         startTime: $filter('date')(nowDate, "yyyy/MM/dd"),
         endTime: $filter('date')(nowDate, "yyyy/MM/dd"),
-        status: 0
+        status: 0,
+        questions: []
       };
 
       $scope.lists.push(newList);
+      updateStorage();
     };
   });
 }

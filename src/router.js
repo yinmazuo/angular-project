@@ -3,7 +3,7 @@ module.exports = function(app, utils) {
   let tpl = utils.tplRequirer(require.context('./controllers', true, /-tpl\.html$/));
 
   app.config(function($urlRouterProvider, $stateProvider) {
-    
+
     $urlRouterProvider
       .when('', '/home')
       .otherwise('');
@@ -18,25 +18,25 @@ module.exports = function(app, utils) {
       .state({
         name: 'mars.lists',
         url: '/home',
-        controller: 'ListsCtrl', 
+        controller: 'ListsCtrl',
         template: tpl('lists'),
       })
       .state({
         name: 'mars.edit',
-        url: '/edit',
-        controller: 'EditCtrl', 
+        url: '/edit/{listId:int}',
+        controller: 'EditCtrl',
         template: tpl('edit'),
       })
       .state({
         name: 'mars.preview',
-        url: '/preview',
-        controller: 'PreviewCtrl', 
+        url: '/preview/{listId:int}',
+        controller: 'PreviewCtrl',
         template: tpl('preview'),
       })
       .state({
         name: 'mars.results',
-        url: '/results',
-        controller: 'ResultsCtrl', 
+        url: '/results/{listId:int}',
+        controller: 'ResultsCtrl',
         template: tpl('results'),
       })
   });
